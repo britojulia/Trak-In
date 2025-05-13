@@ -16,27 +16,29 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.com.fiap.Trak_In.model.Camera;
 import br.com.fiap.Trak_In.model.Moto;
+import br.com.fiap.Trak_In.repository.CameraRepository;
 import br.com.fiap.Trak_In.repository.MotoRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
+
 @RestController
 @Slf4j
-@RequestMapping("/moto")
-public class MotoController {
-    
+@RequestMapping("/camera")
+public class CameraController {
     @Autowired
-    private MotoRepository repository;
+    private CameraRepository repository;
 
     //listar todas as motos cadastradas
     @GetMapping
-    @Cacheable("motos")
-    @Operation(description = "listar todas as motos", tags = "motos", summary = "Lista de motos")
-    public List<Moto> index(){
-        log.info("Buscando as motodos cadastradas");
+    @Cacheable("cameras")
+    @Operation(description = "listar todas as cameras", tags = "cameras", summary = "Lista de cameras")
+    public List<Camera> index(){
+        log.info("Buscando as cameras cadastradas");
         return repository.findAll();
     }
 
@@ -44,42 +46,41 @@ public class MotoController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(responses = {@ApiResponse(responseCode = "400", description = "Falha na validação")})
-    public Moto create(@RequestBody @Valid Moto moto){
-        log.info("cadastrando nova moto" + moto.getPlaca());
-        return repository.save(moto);
+    public Camera create(@RequestBody @Valid Camera camera){
+        log.info("cadastrando nova camera");
+        return repository.save(camera);
     }
 
     //buscar por id
     @GetMapping("{id}")
-    public Moto get(@PathVariable Long id){
-        log.info("buscando por moto" + id);
-        return getMoto(id);
+    public Camera get(@PathVariable Long id){
+        log.info("buscando por camera" + id);
+        return getCamera(id);
     }
 
     //atualizar infos moto
     @PutMapping("{id}")
-    public Moto update(@PathVariable Long id, @RequestBody @Valid Moto moto){
-        log.info("Atualizando info da moto" + moto + " " + moto);
-        getMoto(id);
-        moto.setId(id);
-        return repository.save(moto);
+    public Camera update(@PathVariable Long id, @RequestBody @Valid Camera camera){
+        log.info("Atualizando info da camera" + camera + " " + id);
+        getCamera(id);
+        camera.setId(id);
+        return repository.save(camera);
     }
 
     //deletar moto
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void destroy(@PathVariable Long id){
-        log.info("Apagando moto" + id);
-        repository.delete(getMoto((id)));
+        log.info("Apagando camera" + id);
+        repository.delete(getCamera((id)));
     }
 
-    private Moto getMoto(Long id){
+    private Camera getCamera(Long id){
         return repository.findById(id)
         .orElseThrow(
             () -> new ResponseStatusException(
                 HttpStatus.NOT_FOUND,
-                "Moto não encontrada"
+                "Camera não encontrada"
             ));
     }
-
 }

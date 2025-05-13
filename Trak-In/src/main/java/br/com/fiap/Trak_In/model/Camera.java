@@ -37,4 +37,5 @@ public class Camera {
 
     @OneToMany(mappedBy = "camera")
     private List<DeteccaoVisual> deteccoes;
+
 }
