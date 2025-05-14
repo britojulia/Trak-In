@@ -32,8 +32,6 @@ public class DeteccaoVisual {
 
     private Double coordenadaYPatio;
 
-    private Double confianca; //porcentagem de confiança na detecção
-
     private String imagemCaptura; //opcional, URL para imagem capturada
 
     @ManyToOne

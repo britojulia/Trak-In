@@ -16,29 +16,28 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import br.com.fiap.Trak_In.model.Camera;
-import br.com.fiap.Trak_In.model.Moto;
-import br.com.fiap.Trak_In.repository.CameraRepository;
-import br.com.fiap.Trak_In.repository.MotoRepository;
+import br.com.fiap.Trak_In.model.Usuario;
+import br.com.fiap.Trak_In.model.ZonaPatio;
+import br.com.fiap.Trak_In.repository.UsuarioRepository;
+import br.com.fiap.Trak_In.repository.ZonaPatioRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
-
 @RestController
 @Slf4j
-@RequestMapping("/camera")
-public class CameraController {
+@RequestMapping("/zona")
+public class ZonaPatioController {
     @Autowired
-    private CameraRepository repository;
+    private ZonaPatioRepository repository;
 
-    //listar todas as cameras cadastradas
+    //listar todas as zonas cadastradas
     @GetMapping
-    @Cacheable("cameras")
-    @Operation(description = "listar todas as cameras", tags = "cameras", summary = "Lista de cameras")
-    public List<Camera> index(){
-        log.info("Buscando as cameras cadastradas");
+    @Cacheable("zonas")
+    @Operation(description = "listar todas as zonas", tags = "users", summary = "Lista de zonas")
+    public List<ZonaPatio> index(){
+        log.info("Buscando as zonas de patios cadastradas");
         return repository.findAll();
     }
 
@@ -46,41 +45,40 @@ public class CameraController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(responses = {@ApiResponse(responseCode = "400", description = "Falha na validação")})
-    public Camera create(@RequestBody @Valid Camera camera){
-        log.info("cadastrando nova camera");
-        return repository.save(camera);
+    public ZonaPatio create(@RequestBody @Valid ZonaPatio zona){
+        log.info("cadastrando nova zona de patio");
+        return repository.save(zona);
     }
 
     //buscar por id
     @GetMapping("{id}")
-    public Camera get(@PathVariable Long id){
-        log.info("buscando por camera" + id);
-        return getCamera(id);
+    public ZonaPatio get(@PathVariable Long id){
+        log.info("buscando por zona de patio" + id);
+        return getZona(id);
     }
 
-    //atualizar infos 
+    //atualizar infos moto
     @PutMapping("{id}")
-    public Camera update(@PathVariable Long id, @RequestBody @Valid Camera camera){
-        log.info("Atualizando info da camera" + camera + " " + id);
-        getCamera(id);
-        camera.setId(id);
-        return repository.save(camera);
+    public ZonaPatio update(@PathVariable Long id, @RequestBody @Valid ZonaPatio zona){
+        log.info("Atualizando info da zona patio");
+        getZona(id);
+        return repository.save(zona);
     }
 
     //deletar 
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void destroy(@PathVariable Long id){
-        log.info("Apagando camera" + id);
-        repository.delete(getCamera((id)));
+        log.info("Apagando zona de patio" + id);
+        repository.delete(getZona((id)));
     }
 
-    private Camera getCamera(Long id){
+    private ZonaPatio getZona(Long id){
         return repository.findById(id)
         .orElseThrow(
             () -> new ResponseStatusException(
                 HttpStatus.NOT_FOUND,
-                "Camera não encontrada"
+                "Zona de patio não encontrada"
             ));
     }
 }

@@ -9,36 +9,32 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import br.com.fiap.Trak_In.model.Camera;
-import br.com.fiap.Trak_In.model.Moto;
-import br.com.fiap.Trak_In.repository.CameraRepository;
-import br.com.fiap.Trak_In.repository.MotoRepository;
+import br.com.fiap.Trak_In.model.DeteccaoVisual;
+import br.com.fiap.Trak_In.repository.DeteccaoVisualRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
-
 @RestController
 @Slf4j
-@RequestMapping("/camera")
-public class CameraController {
-    @Autowired
-    private CameraRepository repository;
+@RequestMapping("/deteccao")
+public class DeteccaoVisualController {
+     @Autowired
+    private DeteccaoVisualRepository repository;
 
-    //listar todas as cameras cadastradas
+    //listar todoa dados d detecção visual cadastrada
     @GetMapping
-    @Cacheable("cameras")
-    @Operation(description = "listar todas as cameras", tags = "cameras", summary = "Lista de cameras")
-    public List<Camera> index(){
-        log.info("Buscando as cameras cadastradas");
+    @Cacheable("deteccaos")
+    @Operation(description = "listar todas deteccaoes visuais", tags = "deteccao", summary = "Lista de deteccao visual")
+    public List<DeteccaoVisual> index(){
+        log.info("Buscando as deteccoes visuais cadastradas");
         return repository.findAll();
     }
 
@@ -46,41 +42,32 @@ public class CameraController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(responses = {@ApiResponse(responseCode = "400", description = "Falha na validação")})
-    public Camera create(@RequestBody @Valid Camera camera){
-        log.info("cadastrando nova camera");
-        return repository.save(camera);
+    public DeteccaoVisual create(@RequestBody @Valid DeteccaoVisual deteccaoVisual){
+        log.info("cadastrando nova deteccao");
+        return repository.save(deteccaoVisual);
     }
 
-    //buscar por id
+    //buscar por deteccao específica
     @GetMapping("{id}")
-    public Camera get(@PathVariable Long id){
-        log.info("buscando por camera" + id);
-        return getCamera(id);
+    public DeteccaoVisual get(@PathVariable Long id){
+        log.info("buscando por deteccao" + id);
+        return getDeteccao(id);
     }
 
-    //atualizar infos 
-    @PutMapping("{id}")
-    public Camera update(@PathVariable Long id, @RequestBody @Valid Camera camera){
-        log.info("Atualizando info da camera" + camera + " " + id);
-        getCamera(id);
-        camera.setId(id);
-        return repository.save(camera);
-    }
-
-    //deletar 
+    //deletar ?
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void destroy(@PathVariable Long id){
-        log.info("Apagando camera" + id);
-        repository.delete(getCamera((id)));
+        log.info("Apagando detecao" + id);
+        repository.delete(getDeteccao((id)));
     }
 
-    private Camera getCamera(Long id){
+    private DeteccaoVisual getDeteccao(Long id){
         return repository.findById(id)
         .orElseThrow(
             () -> new ResponseStatusException(
                 HttpStatus.NOT_FOUND,
-                "Camera não encontrada"
+                "Deteccao visual não encontrada"
             ));
     }
 }
