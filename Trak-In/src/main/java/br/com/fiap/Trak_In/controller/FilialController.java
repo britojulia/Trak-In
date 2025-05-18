@@ -37,14 +37,13 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/filial")
 public class FilialController {
     
-    
     @Autowired
     private FilialRepository repository;
 
     //listar todas as filiais cadastradas
-    @@GetMapping
+    @GetMapping
     public Page<Filial> index(
-     @PageableDefault(size = 5, sort= "date", direction = Direction.DESC) Pageable pageable){
+     @PageableDefault(size = 5, sort= "nome", direction = Direction.DESC) Pageable pageable){
         return repository.findAll(pageable);
     }
     //cadastrar 
@@ -68,6 +67,7 @@ public class FilialController {
     public Filial update(@PathVariable Long id, @RequestBody @Valid Filial filial){
         log.info("Atualizando info da filial");
         getFilial(id);
+        filial.setId(id);
         return repository.save(filial);
     }
 
@@ -84,7 +84,7 @@ public class FilialController {
         .orElseThrow(
             () -> new ResponseStatusException(
                 HttpStatus.NOT_FOUND,
-                "Moto não encontrada"
+                "filial não encontrada"
             ));
     }
 }

@@ -32,6 +32,7 @@ import br.com.fiap.Trak_In.repository.MotoRepository;
 import br.com.fiap.Trak_In.repository.PatioRepository;
 import br.com.fiap.Trak_In.repository.UsuarioRepository;
 import br.com.fiap.Trak_In.repository.ZonaPatioRepository;
+import jakarta.annotation.PostConstruct;
 
 @Component
 public class DataBaseSeeder {
@@ -63,7 +64,7 @@ public class DataBaseSeeder {
      @Autowired
     private EventoMotoRepository eventoMotoRepository;
 
-
+    @PostConstruct
     public void init() {
     Patio patio = Patio.builder()
         .nome("Patio Central")

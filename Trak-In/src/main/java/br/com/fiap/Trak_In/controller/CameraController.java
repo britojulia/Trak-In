@@ -43,7 +43,7 @@ public class CameraController {
     //listar todas as cameras cadastradas
     @GetMapping
     public Page<Camera> index(
-    @PageableDefault(size = 5, sort= "date", direction = Direction.DESC) Pageable pageable){
+    @PageableDefault(size = 5, sort= "id", direction = Direction.DESC) Pageable pageable){
     return repository.findAll( pageable);
     }
 
