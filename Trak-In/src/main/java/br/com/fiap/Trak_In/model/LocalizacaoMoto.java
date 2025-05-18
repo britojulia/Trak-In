@@ -10,6 +10,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -44,6 +45,7 @@ public class LocalizacaoMoto {
     private Moto motoId;
 
     @ManyToOne
-    private Patio patioId;
+    @JoinColumn(name = "patio_id")
+    private Patio patio;
 
 }

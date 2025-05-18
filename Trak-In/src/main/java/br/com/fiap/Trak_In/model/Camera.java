@@ -9,6 +9,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
@@ -43,8 +44,8 @@ public class Camera {
     private String url; //url stream de video
 
     @ManyToOne
-    private Patio patioId;
-
+    @JoinColumn(name = "patio_id") 
+    private Patio patio;
 
     @OneToMany(mappedBy = "camera")
     private List<DeteccaoVisual> deteccoes;

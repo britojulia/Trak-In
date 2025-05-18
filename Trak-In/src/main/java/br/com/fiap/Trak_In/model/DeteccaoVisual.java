@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,6 +39,8 @@ public class DeteccaoVisual {
     private Moto moto;
 
     @ManyToOne
-    private Camera cameraId;
+    @JoinColumn(name = "camera_id")
+    private Camera camera;
+
 
 }

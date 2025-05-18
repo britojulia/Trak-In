@@ -4,6 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,10 +20,13 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.com.fiap.Trak_In.controller.DeteccaoVisualController.DeteccaoVisualFilter;
 import br.com.fiap.Trak_In.model.Camera;
+import br.com.fiap.Trak_In.model.DeteccaoVisual;
 import br.com.fiap.Trak_In.model.Moto;
 import br.com.fiap.Trak_In.repository.CameraRepository;
 import br.com.fiap.Trak_In.repository.MotoRepository;
+import br.com.fiap.Trak_In.specification.DetecacaoVisualSpecification;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
@@ -35,11 +42,9 @@ public class CameraController {
 
     //listar todas as cameras cadastradas
     @GetMapping
-    @Cacheable("cameras")
-    @Operation(description = "listar todas as cameras", tags = "cameras", summary = "Lista de cameras")
-    public List<Camera> index(){
-        log.info("Buscando as cameras cadastradas");
-        return repository.findAll();
+    public Page<Camera> index(
+    @PageableDefault(size = 5, sort= "date", direction = Direction.DESC) Pageable pageable){
+    return repository.findAll( pageable);
     }
 
     //cadastrar 

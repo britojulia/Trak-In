@@ -1,9 +1,14 @@
 package br.com.fiap.Trak_In.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,10 +21,15 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.com.fiap.Trak_In.controller.DeteccaoVisualController.DeteccaoVisualFilter;
+import br.com.fiap.Trak_In.model.DeteccaoVisual;
 import br.com.fiap.Trak_In.model.EventoMoto;
 import br.com.fiap.Trak_In.model.Moto;
+import br.com.fiap.Trak_In.model.TypesEnum.FonteEvento;
 import br.com.fiap.Trak_In.repository.EventoMotoRepository;
 import br.com.fiap.Trak_In.repository.MotoRepository;
+import br.com.fiap.Trak_In.specification.DetecacaoVisualSpecification;
+import br.com.fiap.Trak_In.specification.EventoSpecification;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
@@ -29,16 +39,24 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequestMapping("/evento")
 public class EventoMotoController {
+    public record EventoFilter(
+    String tipo,
+    LocalDateTime dataInicio,
+    LocalDateTime dataFim,
+    FonteEvento fonteEvento,
+    Long usuarioId,
+    Long motoId
+) {}
+
     @Autowired
     private EventoMotoRepository repository;
 
     //listar todas os eventos da mota cadastrados
     @GetMapping
-    @Cacheable("eventos")
-    @Operation(description = "listar todas eventos de moto", tags = "eventos", summary = "Lista de eventos")
-    public List<EventoMoto> index(){
-        log.info("Buscando os eventos cadastradas");
-        return repository.findAll();
+    public Page<EventoMoto> index(EventoFilter filter,
+     @PageableDefault(size = 5, sort= "date", direction = Direction.DESC) Pageable pageable){
+    var specification = EventoSpecification.withFilters(filter);
+    return repository.findAll(specification, pageable);
     }
 
     //cadastrar novo evento

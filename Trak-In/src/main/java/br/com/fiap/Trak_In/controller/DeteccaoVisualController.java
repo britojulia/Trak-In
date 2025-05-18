@@ -1,9 +1,14 @@
 package br.com.fiap.Trak_In.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +22,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import br.com.fiap.Trak_In.model.DeteccaoVisual;
 import br.com.fiap.Trak_In.repository.DeteccaoVisualRepository;
+import br.com.fiap.Trak_In.specification.DetecacaoVisualSpecification;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
@@ -26,16 +32,24 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequestMapping("/deteccao")
 public class DeteccaoVisualController {
-     @Autowired
+    public record DeteccaoVisualFilter(String placaMoto,
+    String posicaoCamera,
+    LocalDate dataInicio,
+    LocalDate dataFim,
+    Double coordenadaXMin,
+    Double coordenadaXMax,
+    Double coordenadaYMin,
+    Double coordenadaYMax){}
+
+    @Autowired
     private DeteccaoVisualRepository repository;
 
     //listar todoa dados d detecção visual cadastrada
-    @GetMapping
-    @Cacheable("deteccaos")
-    @Operation(description = "listar todas deteccaoes visuais", tags = "deteccao", summary = "Lista de deteccao visual")
-    public List<DeteccaoVisual> index(){
-        log.info("Buscando as deteccoes visuais cadastradas");
-        return repository.findAll();
+     @GetMapping
+    public Page<DeteccaoVisual> index(DeteccaoVisualFilter filter,
+     @PageableDefault(size = 5, sort= "date", direction = Direction.DESC) Pageable pageable){
+        var specification = DetecacaoVisualSpecification.withFilters(filter);
+        return repository.findAll(specification, pageable);
     }
 
     //cadastrar 
