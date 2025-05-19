@@ -42,6 +42,7 @@ public class LocalizacaoMoto {
     private Double confiabilidade;
 
     @ManyToOne
+    @JoinColumn(name = "moto_id")
     private Moto motoId;
 
     @ManyToOne

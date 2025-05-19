@@ -47,7 +47,7 @@ public class DeteccaoVisualController {
     //listar todoa dados d detecção visual cadastrada
      @GetMapping
     public Page<DeteccaoVisual> index(DeteccaoVisualFilter filter,
-     @PageableDefault(size = 5, sort= "date", direction = Direction.DESC) Pageable pageable){
+     @PageableDefault(size = 5, sort= "id", direction = Direction.DESC) Pageable pageable){
         var specification = DetecacaoVisualSpecification.withFilters(filter);
         return repository.findAll(specification, pageable);
     }

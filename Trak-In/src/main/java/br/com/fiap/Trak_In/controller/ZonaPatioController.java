@@ -42,7 +42,7 @@ public class ZonaPatioController {
     //listar todas as zonas cadastradas
     @GetMapping
     public Page<ZonaPatio> index(
-     @PageableDefault(size = 5, sort= "date", direction = Direction.DESC) Pageable pageable){
+     @PageableDefault(size = 5, sort= "id", direction = Direction.DESC) Pageable pageable){
         return repository.findAll(pageable);
     }
 

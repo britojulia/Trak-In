@@ -53,7 +53,7 @@ public class LocalizacaoController {
     //listar todas localizacoes de motos
     @GetMapping
      public Page<LocalizacaoMoto> index(LocalizacaoFilter filter, 
-    @PageableDefault(size = 5, sort = "date", direction = Direction.DESC) Pageable pageable) {
+    @PageableDefault(size = 5, sort = "id", direction = Direction.DESC) Pageable pageable) {
     var specification = LocalizacaoSpecification.withFilters(filter);
     return repository.findAll(specification, pageable);
     }

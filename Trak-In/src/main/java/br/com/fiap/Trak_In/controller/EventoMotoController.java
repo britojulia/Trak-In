@@ -54,7 +54,7 @@ public class EventoMotoController {
     //listar todas os eventos da mota cadastrados
     @GetMapping
     public Page<EventoMoto> index(EventoFilter filter,
-     @PageableDefault(size = 5, sort= "date", direction = Direction.DESC) Pageable pageable){
+     @PageableDefault(size = 5, sort= "id", direction = Direction.DESC) Pageable pageable){
     var specification = EventoSpecification.withFilters(filter);
     return repository.findAll(specification, pageable);
     }

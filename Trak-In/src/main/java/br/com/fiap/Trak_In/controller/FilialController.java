@@ -43,7 +43,7 @@ public class FilialController {
     //listar todas as filiais cadastradas
     @GetMapping
     public Page<Filial> index(
-     @PageableDefault(size = 5, sort= "nome", direction = Direction.DESC) Pageable pageable){
+     @PageableDefault(size = 5, sort= "id", direction = Direction.DESC) Pageable pageable){
         return repository.findAll(pageable);
     }
     //cadastrar 

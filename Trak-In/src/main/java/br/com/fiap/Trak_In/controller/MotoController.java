@@ -54,7 +54,7 @@ public class MotoController {
     //listar todas as motos cadastradas
     @GetMapping
      public Page<Moto> index(MotoFilter filter, 
-        @PageableDefault(size = 5, sort = "date", direction = Direction.DESC) Pageable pageable) {
+        @PageableDefault(size = 5, sort = "id", direction = Direction.DESC) Pageable pageable) {
     var specification = MotoSpecification.withFilters(filter);
     return repository.findAll(specification, pageable);
     }

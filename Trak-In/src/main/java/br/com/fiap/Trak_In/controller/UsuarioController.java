@@ -48,8 +48,8 @@ public class UsuarioController {
 
     //listar todas os usuarios cadastradas
     @GetMapping
-     public Page<Usuario> index(UsuarioFilter filter, 
-    @PageableDefault(size = 5, sort = "date", direction = Direction.DESC) Pageable pageable) {
+    public Page<Usuario> index(UsuarioFilter filter, 
+    @PageableDefault(size = 5, sort = "id", direction = Direction.DESC) Pageable pageable) {
     var specification = UsuarioSpecification.withFilters(filter);
     return repository.findAll(specification, pageable);
     }

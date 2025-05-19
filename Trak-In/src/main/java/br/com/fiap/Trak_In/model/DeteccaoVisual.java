@@ -36,6 +36,7 @@ public class DeteccaoVisual {
     private String imagemCaptura; //opcional, URL para imagem capturada
 
     @ManyToOne
+    @JoinColumn(name = "moto_id")
     private Moto moto;
 
     @ManyToOne
