@@ -1,7 +1,5 @@
 package br.com.fiap.Trak_In.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.domain.Page;
@@ -20,14 +18,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import br.com.fiap.Trak_In.DTOs.MotoDTO;
 import br.com.fiap.Trak_In.DTOs.PatioDTO;
-import br.com.fiap.Trak_In.controller.MotoController.MotoFilter;
-import br.com.fiap.Trak_In.mappings.MotoMapper;
 import br.com.fiap.Trak_In.mappings.PatioMapper;
 import br.com.fiap.Trak_In.model.Patio;
 import br.com.fiap.Trak_In.repository.PatioRepository;
-import br.com.fiap.Trak_In.specification.MotoSpecification;
 import br.com.fiap.Trak_In.specification.PatioSpecification;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

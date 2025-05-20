@@ -1,10 +1,8 @@
 package br.com.fiap.Trak_In.controller;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
@@ -21,20 +19,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import br.com.fiap.Trak_In.DTOs.CameraDTO;
 import br.com.fiap.Trak_In.DTOs.EventoMotoDTO;
-import br.com.fiap.Trak_In.controller.DeteccaoVisualController.DeteccaoVisualFilter;
-import br.com.fiap.Trak_In.mappings.CameraMapper;
 import br.com.fiap.Trak_In.mappings.EventoMotoMapper;
-import br.com.fiap.Trak_In.mappings.ZonaPatioMapper;
-import br.com.fiap.Trak_In.model.DeteccaoVisual;
 import br.com.fiap.Trak_In.model.EventoMoto;
-import br.com.fiap.Trak_In.model.Moto;
 import br.com.fiap.Trak_In.model.TypesEnum.FonteEvento;
-import br.com.fiap.Trak_In.model.ZonaPatio;
 import br.com.fiap.Trak_In.repository.EventoMotoRepository;
-import br.com.fiap.Trak_In.repository.MotoRepository;
-import br.com.fiap.Trak_In.specification.DetecacaoVisualSpecification;
 import br.com.fiap.Trak_In.specification.EventoSpecification;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

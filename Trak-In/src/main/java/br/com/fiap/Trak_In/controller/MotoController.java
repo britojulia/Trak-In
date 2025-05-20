@@ -1,10 +1,8 @@
 package br.com.fiap.Trak_In.controller;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
@@ -21,15 +19,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import br.com.fiap.Trak_In.DTOs.CameraDTO;
 import br.com.fiap.Trak_In.DTOs.MotoDTO;
-import br.com.fiap.Trak_In.mappings.CameraMapper;
 import br.com.fiap.Trak_In.mappings.MotoMapper;
-import br.com.fiap.Trak_In.mappings.ZonaPatioMapper;
 import br.com.fiap.Trak_In.model.Moto;
 import br.com.fiap.Trak_In.model.Patio;
 import br.com.fiap.Trak_In.model.TypesEnum.StatusMoto;
-import br.com.fiap.Trak_In.model.ZonaPatio;
 import br.com.fiap.Trak_In.repository.MotoRepository;
 import br.com.fiap.Trak_In.specification.MotoSpecification;
 import io.swagger.v3.oas.annotations.Operation;

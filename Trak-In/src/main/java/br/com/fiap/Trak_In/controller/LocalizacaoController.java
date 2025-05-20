@@ -1,10 +1,6 @@
 package br.com.fiap.Trak_In.controller;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
@@ -14,27 +10,20 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import br.com.fiap.Trak_In.DTOs.CameraDTO;
+
 import br.com.fiap.Trak_In.DTOs.LocalizacaoDTO;
-import br.com.fiap.Trak_In.controller.MotoController.MotoFilter;
-import br.com.fiap.Trak_In.mappings.CameraMapper;
 import br.com.fiap.Trak_In.mappings.LocalizacaoMapper;
 import br.com.fiap.Trak_In.model.LocalizacaoMoto;
-import br.com.fiap.Trak_In.model.Moto;
 import br.com.fiap.Trak_In.model.TypesEnum.FonteDados;
 import br.com.fiap.Trak_In.model.TypesEnum.StatusLocalizacao;
-import br.com.fiap.Trak_In.model.Usuario;
 import br.com.fiap.Trak_In.repository.LocalizacaoRepository;
-import br.com.fiap.Trak_In.repository.UsuarioRepository;
 import br.com.fiap.Trak_In.specification.LocalizacaoSpecification;
-import br.com.fiap.Trak_In.specification.MotoSpecification;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
