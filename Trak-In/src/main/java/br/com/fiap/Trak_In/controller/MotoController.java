@@ -25,9 +25,11 @@ import br.com.fiap.Trak_In.DTOs.CameraDTO;
 import br.com.fiap.Trak_In.DTOs.MotoDTO;
 import br.com.fiap.Trak_In.mappings.CameraMapper;
 import br.com.fiap.Trak_In.mappings.MotoMapper;
+import br.com.fiap.Trak_In.mappings.ZonaPatioMapper;
 import br.com.fiap.Trak_In.model.Moto;
 import br.com.fiap.Trak_In.model.Patio;
 import br.com.fiap.Trak_In.model.TypesEnum.StatusMoto;
+import br.com.fiap.Trak_In.model.ZonaPatio;
 import br.com.fiap.Trak_In.repository.MotoRepository;
 import br.com.fiap.Trak_In.specification.MotoSpecification;
 import io.swagger.v3.oas.annotations.Operation;
@@ -82,11 +84,12 @@ public class MotoController {
 
     //atualizar infos moto
     @PutMapping("{id}")
-    public Moto update(@PathVariable Long id, @RequestBody @Valid Moto moto){
-        log.info("Atualizando info da moto" + moto + " " + moto);
+    public MotoDTO update(@PathVariable Long id, @RequestBody @Valid Moto moto){
+        log.info("Atualizando info da moto" + moto);
         getMoto(id);
         moto.setId(id);
-        return repository.save(moto);
+        Moto atualizada = repository.save(moto);
+        return MotoMapper.toDTO(atualizada);
     }
 
     //deletar moto

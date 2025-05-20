@@ -23,9 +23,11 @@ import org.springframework.web.server.ResponseStatusException;
 import br.com.fiap.Trak_In.DTOs.CameraDTO;
 import br.com.fiap.Trak_In.controller.DeteccaoVisualController.DeteccaoVisualFilter;
 import br.com.fiap.Trak_In.mappings.CameraMapper;
+import br.com.fiap.Trak_In.mappings.ZonaPatioMapper;
 import br.com.fiap.Trak_In.model.Camera;
 import br.com.fiap.Trak_In.model.DeteccaoVisual;
 import br.com.fiap.Trak_In.model.Moto;
+import br.com.fiap.Trak_In.model.ZonaPatio;
 import br.com.fiap.Trak_In.repository.CameraRepository;
 import br.com.fiap.Trak_In.repository.MotoRepository;
 import br.com.fiap.Trak_In.specification.DetecacaoVisualSpecification;
@@ -54,7 +56,7 @@ public class CameraController {
     //buscar por id
     @GetMapping("{id}")
     public CameraDTO get(@PathVariable Long id) {
-        log.info("Buscando por câmera " + id);
+        log.info("Buscando por camera " + id);
         return CameraMapper.toDTO(getCamera(id));
     }
 
@@ -69,11 +71,12 @@ public class CameraController {
 
     //atualizar infos 
     @PutMapping("{id}")
-    public Camera update(@PathVariable Long id, @RequestBody @Valid Camera camera){
-        log.info("Atualizando info da camera" + camera + " " + id);
+    public CameraDTO update(@PathVariable Long id, @RequestBody @Valid Camera camera){
+        log.info("Atualizando info da camera" + id);
         getCamera(id);
         camera.setId(id);
-        return repository.save(camera);
+        Camera atualizada = repository.save(camera);
+        return CameraMapper.toDTO(atualizada);
     }
 
     //deletar 

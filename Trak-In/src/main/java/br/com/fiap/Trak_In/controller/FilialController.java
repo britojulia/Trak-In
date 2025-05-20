@@ -25,9 +25,11 @@ import br.com.fiap.Trak_In.DTOs.FilialDTO;
 import br.com.fiap.Trak_In.controller.DeteccaoVisualController.DeteccaoVisualFilter;
 import br.com.fiap.Trak_In.mappings.CameraMapper;
 import br.com.fiap.Trak_In.mappings.FilialMapper;
+import br.com.fiap.Trak_In.mappings.ZonaPatioMapper;
 import br.com.fiap.Trak_In.model.DeteccaoVisual;
 import br.com.fiap.Trak_In.model.Filial;
 import br.com.fiap.Trak_In.model.Moto;
+import br.com.fiap.Trak_In.model.ZonaPatio;
 import br.com.fiap.Trak_In.repository.FilialRepository;
 import br.com.fiap.Trak_In.repository.MotoRepository;
 import br.com.fiap.Trak_In.specification.DetecacaoVisualSpecification;
@@ -70,11 +72,12 @@ public class FilialController {
 
     //atualizar 
     @PutMapping("{id}")
-    public Filial update(@PathVariable Long id, @RequestBody @Valid Filial filial){
-        log.info("Atualizando info da filial");
+    public FilialDTO update(@PathVariable Long id, @RequestBody @Valid Filial filial){
+        log.info("Atualizando info da filial" + id);
         getFilial(id);
         filial.setId(id);
-        return repository.save(filial);
+        Filial atualizada = repository.save(filial);
+        return FilialMapper.toDTO(atualizada);
     }
 
     //deletar

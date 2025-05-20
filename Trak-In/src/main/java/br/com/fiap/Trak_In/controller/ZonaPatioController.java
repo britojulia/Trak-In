@@ -54,7 +54,7 @@ public class ZonaPatioController {
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(responses = {@ApiResponse(responseCode = "400", description = "Falha na validação")})
     public ZonaPatio create(@RequestBody @Valid ZonaPatio zona){
-        log.info("cadastrando nova zona de patio");
+        log.info("cadastrando nova zona patio");
         return repository.save(zona);
     }
 
@@ -67,10 +67,12 @@ public class ZonaPatioController {
 
     //atualizar infos moto
     @PutMapping("{id}")
-    public ZonaPatio update(@PathVariable Long id, @RequestBody @Valid ZonaPatio zona){
-        log.info("Atualizando info da zona patio");
+    public ZonaPatioDTO update(@PathVariable Long id, @RequestBody @Valid ZonaPatio zona){
+        log.info("Atualizando info da zona patio" + id);
         getZona(id);
-        return repository.save(zona);
+        zona.setId(id);
+        ZonaPatio atualizada = repository.save(zona);
+        return ZonaPatioMapper.toDTO(atualizada);
     }
 
     //deletar 

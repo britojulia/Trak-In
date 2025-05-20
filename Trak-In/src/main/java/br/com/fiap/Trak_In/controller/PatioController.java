@@ -24,8 +24,10 @@ import org.springframework.web.server.ResponseStatusException;
 import br.com.fiap.Trak_In.DTOs.PatioDTO;
 import br.com.fiap.Trak_In.controller.DeteccaoVisualController.DeteccaoVisualFilter;
 import br.com.fiap.Trak_In.mappings.PatioMapper;
+import br.com.fiap.Trak_In.mappings.ZonaPatioMapper;
 import br.com.fiap.Trak_In.model.DeteccaoVisual;
 import br.com.fiap.Trak_In.model.Patio;
+import br.com.fiap.Trak_In.model.ZonaPatio;
 import br.com.fiap.Trak_In.repository.PatioRepository;
 import br.com.fiap.Trak_In.specification.DetecacaoVisualSpecification;
 import io.swagger.v3.oas.annotations.Operation;
@@ -68,11 +70,12 @@ public class PatioController {
 
     // ATUALIZAR
     @PutMapping("{id}")
-    public Patio update(@PathVariable Long id, @RequestBody @Valid Patio patio) {
-        log.info("Atualizando pátio: " + id + " " + patio);
+    public PatioDTO update(@PathVariable Long id, @RequestBody @Valid Patio patio) {
+        log.info("Atualizando pátio: " + id );
         getPatio(id);
         patio.setId(id);
-        return repository.save(patio);
+        Patio atualizada = repository.save(patio);
+        return PatioMapper.toDTO(atualizada);
     }
 
     // DELETAR

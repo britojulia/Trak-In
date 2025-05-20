@@ -57,7 +57,7 @@ public class LocalizacaoController {
 
     //listar todas localizacoes de motos
     @GetMapping
-     public Page<LocalizacaoDTO> index(LocalizacaoFilter filter, 
+    public Page<LocalizacaoDTO> index(LocalizacaoFilter filter, 
     @PageableDefault(size = 5, sort = "id", direction = Direction.DESC) Pageable pageable) {
     var specification = LocalizacaoSpecification.withFilters(filter);
     return repository.findAll(specification, pageable)
@@ -79,7 +79,6 @@ public class LocalizacaoController {
         log.info("buscando por localizacao" + id);
         return LocalizacaoMapper.toDTO(getLocal(id));
     }
-
 
     //deletar 
     @DeleteMapping("{id}")

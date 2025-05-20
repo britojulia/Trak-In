@@ -26,10 +26,12 @@ import br.com.fiap.Trak_In.DTOs.EventoMotoDTO;
 import br.com.fiap.Trak_In.controller.DeteccaoVisualController.DeteccaoVisualFilter;
 import br.com.fiap.Trak_In.mappings.CameraMapper;
 import br.com.fiap.Trak_In.mappings.EventoMotoMapper;
+import br.com.fiap.Trak_In.mappings.ZonaPatioMapper;
 import br.com.fiap.Trak_In.model.DeteccaoVisual;
 import br.com.fiap.Trak_In.model.EventoMoto;
 import br.com.fiap.Trak_In.model.Moto;
 import br.com.fiap.Trak_In.model.TypesEnum.FonteEvento;
+import br.com.fiap.Trak_In.model.ZonaPatio;
 import br.com.fiap.Trak_In.repository.EventoMotoRepository;
 import br.com.fiap.Trak_In.repository.MotoRepository;
 import br.com.fiap.Trak_In.specification.DetecacaoVisualSpecification;
@@ -77,16 +79,18 @@ public class EventoMotoController {
     //buscar por id
     @GetMapping("{id}")
     public EventoMotoDTO get(@PathVariable Long id){
-        log.info("buscando por moto" + id);
+        log.info("buscando por evento" + id);
         return EventoMotoMapper.toDTO(getEvento(id));
     }
 
     //atualizar infos 
     @PutMapping("{id}")
-    public EventoMoto update(@PathVariable Long id, @RequestBody @Valid EventoMoto eventoMoto){
-        log.info("Atualizando info" + eventoMoto);
+    public EventoMotoDTO update(@PathVariable Long id, @RequestBody @Valid EventoMoto eventoMoto){
+        log.info("Atualizando info de evento" + eventoMoto);
         getEvento(id);
-        return repository.save(eventoMoto);
+        eventoMoto.setId(id);
+        EventoMoto atualizada = repository.save(eventoMoto);
+        return EventoMotoMapper.toDTO(atualizada);
     }
 
     //deletar

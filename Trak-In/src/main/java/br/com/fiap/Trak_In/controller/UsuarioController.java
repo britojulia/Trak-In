@@ -23,9 +23,11 @@ import org.springframework.web.server.ResponseStatusException;
 import br.com.fiap.Trak_In.DTOs.UsuarioDTO;
 import br.com.fiap.Trak_In.controller.MotoController.MotoFilter;
 import br.com.fiap.Trak_In.mappings.UsuarioMapper;
+import br.com.fiap.Trak_In.mappings.ZonaPatioMapper;
 import br.com.fiap.Trak_In.model.Moto;
 import br.com.fiap.Trak_In.model.TypesEnum.PerfilUsuario;
 import br.com.fiap.Trak_In.model.Usuario;
+import br.com.fiap.Trak_In.model.ZonaPatio;
 import br.com.fiap.Trak_In.repository.MotoRepository;
 import br.com.fiap.Trak_In.repository.UsuarioRepository;
 import br.com.fiap.Trak_In.specification.MotoSpecification;
@@ -75,11 +77,12 @@ public class UsuarioController {
 
     //atualizar infos moto
     @PutMapping("{id}")
-    public Usuario update(@PathVariable Long id, @RequestBody @Valid Usuario user){
+    public UsuarioDTO update(@PathVariable Long id, @RequestBody @Valid Usuario user){
         log.info("Atualizando info do usuario" + user + " " + id);
         getUser(id);
         user.setId(id);
-        return repository.save(user);
+        Usuario atualizada = repository.save(user);
+        return UsuarioMapper.toDTO(atualizada);
     }
 
     //deletar usuario
