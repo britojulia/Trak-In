@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.com.fiap.Trak_In.DTOs.CameraDTO;
-import br.com.fiap.Trak_In.DTOs.CameraMapper;
 import br.com.fiap.Trak_In.controller.DeteccaoVisualController.DeteccaoVisualFilter;
+import br.com.fiap.Trak_In.mappings.CameraMapper;
 import br.com.fiap.Trak_In.model.Camera;
 import br.com.fiap.Trak_In.model.DeteccaoVisual;
 import br.com.fiap.Trak_In.model.Moto;

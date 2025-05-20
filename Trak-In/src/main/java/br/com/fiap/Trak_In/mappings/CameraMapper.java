@@ -1,5 +1,6 @@
-package br.com.fiap.Trak_In.DTOs;
+package br.com.fiap.Trak_In.mappings;
 
+import br.com.fiap.Trak_In.DTOs.CameraDTO;
 import br.com.fiap.Trak_In.model.Camera;
 
 public class CameraMapper {
