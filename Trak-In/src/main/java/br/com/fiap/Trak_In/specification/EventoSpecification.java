@@ -6,9 +6,7 @@ import java.util.List;
 import org.springframework.data.jpa.domain.Specification;
 
 import br.com.fiap.Trak_In.controller.EventoMotoController.EventoFilter;
-import br.com.fiap.Trak_In.controller.LocalizacaoController.LocalizacaoFilter;
 import br.com.fiap.Trak_In.model.EventoMoto;
-import br.com.fiap.Trak_In.model.LocalizacaoMoto;
 import jakarta.persistence.criteria.Predicate;
 
 public class EventoSpecification {
@@ -28,11 +26,6 @@ public class EventoSpecification {
 
             if (filter.dataFim() != null) {
                 predicates.add(cb.lessThanOrEqualTo(root.get("timesTamp"), filter.dataFim()));
-            }
-
-            // filtrar por Fonte do evento
-            if (filter.fonteEvento() != null) {
-                predicates.add(cb.equal(root.get("fonteEvento"), filter.fonteEvento()));
             }
 
             // filtrar por Usuário associado ao evento

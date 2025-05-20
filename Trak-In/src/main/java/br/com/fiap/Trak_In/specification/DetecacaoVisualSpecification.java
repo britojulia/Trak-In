@@ -37,25 +37,6 @@ public class DetecacaoVisualSpecification {
                 predicates.add(cb.equal(root.get("camera").get("id"), filter.posicaoCamera()));
             }
 
-            // filtrar por coodernada X da Imagem
-            if (filter.coordenadaXMin() != null) {
-                predicates.add(cb.greaterThanOrEqualTo(
-                        root.get("coordenadaXImagem"), filter.coordenadaXMin()));
-            }
-            if (filter.coordenadaXMax() != null) {
-                predicates.add(cb.lessThanOrEqualTo(
-                        root.get("coordenadaXImagem"), filter.coordenadaXMax()));
-            }
-
-            // filtrar por coodernada y da Imagem
-            if (filter.coordenadaYMin() != null) {
-                predicates.add(cb.greaterThanOrEqualTo(
-                        root.get("coordenadaYImagem"), filter.coordenadaYMin()));
-            }
-            if (filter.coordenadaYMax() != null) {
-                predicates.add(cb.lessThanOrEqualTo(
-                        root.get("coordenadaYImagem"), filter.coordenadaYMax()));
-            }
             
             return cb.and(predicates.toArray(new Predicate[0]));
 

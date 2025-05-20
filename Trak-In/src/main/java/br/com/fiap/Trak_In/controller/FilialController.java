@@ -21,9 +21,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.com.fiap.Trak_In.DTOs.CameraDTO;
+import br.com.fiap.Trak_In.DTOs.DeteccaoVisualDTO;
 import br.com.fiap.Trak_In.DTOs.FilialDTO;
 import br.com.fiap.Trak_In.controller.DeteccaoVisualController.DeteccaoVisualFilter;
 import br.com.fiap.Trak_In.mappings.CameraMapper;
+import br.com.fiap.Trak_In.mappings.DeteccaoVisualMapper;
 import br.com.fiap.Trak_In.mappings.FilialMapper;
 import br.com.fiap.Trak_In.mappings.ZonaPatioMapper;
 import br.com.fiap.Trak_In.model.DeteccaoVisual;
@@ -33,6 +35,7 @@ import br.com.fiap.Trak_In.model.ZonaPatio;
 import br.com.fiap.Trak_In.repository.FilialRepository;
 import br.com.fiap.Trak_In.repository.MotoRepository;
 import br.com.fiap.Trak_In.specification.DetecacaoVisualSpecification;
+import br.com.fiap.Trak_In.specification.FilialSpecification;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
@@ -42,17 +45,26 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequestMapping("/filial")
 public class FilialController {
+
+    public record FilialFilter(
+    String nome,
+    Long responsavelId,
+    Long patioId
+) {}
+
     
     @Autowired
     private FilialRepository repository;
 
     //listar todas as filiais cadastradas
     @GetMapping
-    public Page<FilialDTO> index(
-     @PageableDefault(size = 5, sort= "id", direction = Direction.DESC) Pageable pageable){
-        return repository.findAll(pageable)
+    public Page<FilialDTO> index(FilialFilter filter,
+    @PageableDefault(size = 5, sort= "id", direction = Direction.DESC) Pageable pageable){
+        var specification = FilialSpecification.withFilters(filter);
+        return repository.findAll(specification, pageable)
         .map(FilialMapper::toDTO);
     }
+
     //cadastrar 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

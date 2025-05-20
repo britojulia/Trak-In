@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
@@ -21,15 +20,15 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.com.fiap.Trak_In.DTOs.MotoDTO;
 import br.com.fiap.Trak_In.DTOs.PatioDTO;
-import br.com.fiap.Trak_In.controller.DeteccaoVisualController.DeteccaoVisualFilter;
+import br.com.fiap.Trak_In.controller.MotoController.MotoFilter;
+import br.com.fiap.Trak_In.mappings.MotoMapper;
 import br.com.fiap.Trak_In.mappings.PatioMapper;
-import br.com.fiap.Trak_In.mappings.ZonaPatioMapper;
-import br.com.fiap.Trak_In.model.DeteccaoVisual;
 import br.com.fiap.Trak_In.model.Patio;
-import br.com.fiap.Trak_In.model.ZonaPatio;
 import br.com.fiap.Trak_In.repository.PatioRepository;
-import br.com.fiap.Trak_In.specification.DetecacaoVisualSpecification;
+import br.com.fiap.Trak_In.specification.MotoSpecification;
+import br.com.fiap.Trak_In.specification.PatioSpecification;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
@@ -40,14 +39,22 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/patio")
 public class PatioController {
 
+    
+public record PatioFilter(
+    String nome,
+    String estado,
+    String pais
+) {}
+
     @Autowired
     private PatioRepository repository;
 
     // LISTAR TODOS OS PATIOS
     @GetMapping
-    public Page<PatioDTO> index(
+    public Page<PatioDTO> index(PatioFilter filter,
      @PageableDefault(size = 5, sort= "id", direction = Direction.DESC) Pageable pageable){
-        return repository.findAll(pageable)
+        var specification = PatioSpecification.withFilters(filter); 
+        return repository.findAll(specification, pageable)
         .map(PatioMapper::toDTO);
     }
 

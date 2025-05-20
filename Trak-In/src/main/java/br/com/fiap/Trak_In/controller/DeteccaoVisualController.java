@@ -39,11 +39,7 @@ public class DeteccaoVisualController {
     public record DeteccaoVisualFilter(String placaMoto,
     String posicaoCamera,
     LocalDate dataInicio,
-    LocalDate dataFim,
-    Double coordenadaXMin,
-    Double coordenadaXMax,
-    Double coordenadaYMin,
-    Double coordenadaYMax){}
+    LocalDate dataFim){}
 
     @Autowired
     private DeteccaoVisualRepository repository;

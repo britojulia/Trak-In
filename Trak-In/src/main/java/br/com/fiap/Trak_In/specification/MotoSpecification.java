@@ -13,7 +13,6 @@ public class MotoSpecification {
     public static Specification<Moto> withFilters(MotoFilter filter){
         return (root, query, cb) -> {
             List<Predicate> predicates = new ArrayList<>();
-
             
             //filtra por Placa
             if (filter.placa() != null && !filter.placa().isBlank()) {
@@ -29,12 +28,13 @@ public class MotoSpecification {
             if (filter.rfidTag() != null && !filter.rfidTag().isBlank()) {
                 predicates.add(cb.like(cb.lower(root.get("rfidTag")), "%" + filter.rfidTag().toLowerCase() + "%"));
             }
+
             //filtra por Status
             if (filter.status() != null) {
                 predicates.add(cb.equal(root.get("status"), filter.status()));
             }
 
-            // Data de aquisição (intervalo)
+            // Data de aquisição 
             if (filter.dataAquisicao() != null) {
                 predicates.add(cb.greaterThanOrEqualTo(root.get("dataAquisicao"), filter.dataAquisicao()));
             }

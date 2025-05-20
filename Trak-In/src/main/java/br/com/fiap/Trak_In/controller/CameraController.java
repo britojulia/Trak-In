@@ -3,10 +3,10 @@ package br.com.fiap.Trak_In.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,15 +21,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.com.fiap.Trak_In.DTOs.CameraDTO;
+import br.com.fiap.Trak_In.DTOs.DeteccaoVisualDTO;
 import br.com.fiap.Trak_In.controller.DeteccaoVisualController.DeteccaoVisualFilter;
 import br.com.fiap.Trak_In.mappings.CameraMapper;
-import br.com.fiap.Trak_In.mappings.ZonaPatioMapper;
+import br.com.fiap.Trak_In.mappings.DeteccaoVisualMapper;
 import br.com.fiap.Trak_In.model.Camera;
-import br.com.fiap.Trak_In.model.DeteccaoVisual;
-import br.com.fiap.Trak_In.model.Moto;
-import br.com.fiap.Trak_In.model.ZonaPatio;
+import br.com.fiap.Trak_In.model.TypesEnum.StatusCamera;
 import br.com.fiap.Trak_In.repository.CameraRepository;
-import br.com.fiap.Trak_In.repository.MotoRepository;
+import br.com.fiap.Trak_In.specification.CameraSpecification;
 import br.com.fiap.Trak_In.specification.DetecacaoVisualSpecification;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -41,15 +40,21 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequestMapping("/camera")
 public class CameraController {
+    public record CameraFilter(
+    StatusCamera status,
+    Long idPatio
+) {}
+
     @Autowired
     private CameraRepository repository;
 
     //listar todas as cameras cadastradas
     @GetMapping
-    public Page<CameraDTO> index(
+    public Page<CameraDTO> index(CameraFilter filter,
     @PageableDefault(size = 5, sort= "id", direction = Direction.DESC) Pageable pageable){
-    return repository.findAll( pageable)
-    .map(CameraMapper::toDTO);
+        var specification = CameraSpecification.withFilters(filter);
+        return repository.findAll(specification, pageable)
+        .map(CameraMapper::toDTO);
             
     }
 
