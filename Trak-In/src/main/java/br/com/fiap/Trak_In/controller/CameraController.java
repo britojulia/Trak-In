@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.com.fiap.Trak_In.DTOs.CameraDTO;
+import br.com.fiap.Trak_In.DTOs.CameraMapper;
 import br.com.fiap.Trak_In.controller.DeteccaoVisualController.DeteccaoVisualFilter;
 import br.com.fiap.Trak_In.model.Camera;
 import br.com.fiap.Trak_In.model.DeteccaoVisual;
@@ -42,9 +44,11 @@ public class CameraController {
 
     //listar todas as cameras cadastradas
     @GetMapping
-    public Page<Camera> index(
+    public Page<CameraDTO> index(
     @PageableDefault(size = 5, sort= "id", direction = Direction.DESC) Pageable pageable){
-    return repository.findAll( pageable);
+    return repository.findAll( pageable)
+    .map(CameraMapper::toDTO);
+            
     }
 
     //cadastrar 
