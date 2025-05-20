@@ -21,7 +21,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.com.fiap.Trak_In.DTOs.CameraDTO;
+import br.com.fiap.Trak_In.DTOs.LocalizacaoDTO;
 import br.com.fiap.Trak_In.controller.MotoController.MotoFilter;
+import br.com.fiap.Trak_In.mappings.CameraMapper;
+import br.com.fiap.Trak_In.mappings.LocalizacaoMapper;
 import br.com.fiap.Trak_In.model.LocalizacaoMoto;
 import br.com.fiap.Trak_In.model.Moto;
 import br.com.fiap.Trak_In.model.TypesEnum.FonteDados;
@@ -47,15 +51,17 @@ public class LocalizacaoController {
     Long motoId,
     Long patioId
 ) {}
+
     @Autowired
     private LocalizacaoRepository repository;
 
     //listar todas localizacoes de motos
     @GetMapping
-     public Page<LocalizacaoMoto> index(LocalizacaoFilter filter, 
+     public Page<LocalizacaoDTO> index(LocalizacaoFilter filter, 
     @PageableDefault(size = 5, sort = "id", direction = Direction.DESC) Pageable pageable) {
     var specification = LocalizacaoSpecification.withFilters(filter);
-    return repository.findAll(specification, pageable);
+    return repository.findAll(specification, pageable)
+    .map(LocalizacaoMapper::toDTO);
     }
 
     //cadastrar 
@@ -69,9 +75,9 @@ public class LocalizacaoController {
 
     //buscar por id
     @GetMapping("{id}")
-    public LocalizacaoMoto get(@PathVariable Long id){
+    public LocalizacaoDTO get(@PathVariable Long id){
         log.info("buscando por localizacao" + id);
-        return getLocal(id);
+        return LocalizacaoMapper.toDTO(getLocal(id));
     }
 
 

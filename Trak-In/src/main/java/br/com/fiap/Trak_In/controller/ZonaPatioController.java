@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.com.fiap.Trak_In.DTOs.ZonaPatioDTO;
 import br.com.fiap.Trak_In.controller.DeteccaoVisualController.DeteccaoVisualFilter;
+import br.com.fiap.Trak_In.mappings.ZonaPatioMapper;
 import br.com.fiap.Trak_In.model.DeteccaoVisual;
 import br.com.fiap.Trak_In.model.Usuario;
 import br.com.fiap.Trak_In.model.ZonaPatio;
@@ -41,9 +43,10 @@ public class ZonaPatioController {
 
     //listar todas as zonas cadastradas
     @GetMapping
-    public Page<ZonaPatio> index(
+    public Page<ZonaPatioDTO> index(
      @PageableDefault(size = 5, sort= "id", direction = Direction.DESC) Pageable pageable){
-        return repository.findAll(pageable);
+        return repository.findAll(pageable)
+        .map(ZonaPatioMapper::toDTO);
     }
 
     //cadastrar 
@@ -57,9 +60,9 @@ public class ZonaPatioController {
 
     //buscar por id
     @GetMapping("{id}")
-    public ZonaPatio get(@PathVariable Long id){
+    public ZonaPatioDTO get(@PathVariable Long id){
         log.info("buscando por zona de patio" + id);
-        return getZona(id);
+        return ZonaPatioMapper.toDTO(getZona(id));
     }
 
     //atualizar infos moto

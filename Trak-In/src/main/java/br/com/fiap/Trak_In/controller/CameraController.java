@@ -51,6 +51,13 @@ public class CameraController {
             
     }
 
+    //buscar por id
+    @GetMapping("{id}")
+    public CameraDTO get(@PathVariable Long id) {
+        log.info("Buscando por câmera " + id);
+        return CameraMapper.toDTO(getCamera(id));
+    }
+
     //cadastrar 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -58,13 +65,6 @@ public class CameraController {
     public Camera create(@RequestBody @Valid Camera camera){
         log.info("cadastrando nova camera");
         return repository.save(camera);
-    }
-
-    //buscar por id
-    @GetMapping("{id}")
-    public Camera get(@PathVariable Long id){
-        log.info("buscando por camera" + id);
-        return getCamera(id);
     }
 
     //atualizar infos 

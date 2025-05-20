@@ -20,7 +20,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.com.fiap.Trak_In.DTOs.CameraDTO;
+import br.com.fiap.Trak_In.DTOs.FilialDTO;
 import br.com.fiap.Trak_In.controller.DeteccaoVisualController.DeteccaoVisualFilter;
+import br.com.fiap.Trak_In.mappings.CameraMapper;
+import br.com.fiap.Trak_In.mappings.FilialMapper;
 import br.com.fiap.Trak_In.model.DeteccaoVisual;
 import br.com.fiap.Trak_In.model.Filial;
 import br.com.fiap.Trak_In.model.Moto;
@@ -42,9 +46,10 @@ public class FilialController {
 
     //listar todas as filiais cadastradas
     @GetMapping
-    public Page<Filial> index(
+    public Page<FilialDTO> index(
      @PageableDefault(size = 5, sort= "id", direction = Direction.DESC) Pageable pageable){
-        return repository.findAll(pageable);
+        return repository.findAll(pageable)
+        .map(FilialMapper::toDTO);
     }
     //cadastrar 
     @PostMapping
@@ -57,10 +62,11 @@ public class FilialController {
 
     //buscar por id
     @GetMapping("{id}")
-    public Filial get(@PathVariable Long id){
+    public FilialDTO get(@PathVariable Long id){
         log.info("buscando por filial" + id);
-        return getFilial(id);
+        return FilialMapper.toDTO(getFilial(id));
     }
+    
 
     //atualizar 
     @PutMapping("{id}")

@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.com.fiap.Trak_In.DTOs.UsuarioDTO;
 import br.com.fiap.Trak_In.controller.MotoController.MotoFilter;
+import br.com.fiap.Trak_In.mappings.UsuarioMapper;
 import br.com.fiap.Trak_In.model.Moto;
 import br.com.fiap.Trak_In.model.TypesEnum.PerfilUsuario;
 import br.com.fiap.Trak_In.model.Usuario;
@@ -48,10 +50,11 @@ public class UsuarioController {
 
     //listar todas os usuarios cadastradas
     @GetMapping
-    public Page<Usuario> index(UsuarioFilter filter, 
+    public Page<UsuarioDTO> index(UsuarioFilter filter, 
     @PageableDefault(size = 5, sort = "id", direction = Direction.DESC) Pageable pageable) {
     var specification = UsuarioSpecification.withFilters(filter);
-    return repository.findAll(specification, pageable);
+    return repository.findAll(specification, pageable)
+    .map(UsuarioMapper::toDTO);
     }
 
     //cadastrar motos
@@ -65,9 +68,9 @@ public class UsuarioController {
 
     //buscar por id
     @GetMapping("{id}")
-    public Usuario get(@PathVariable Long id){
+    public UsuarioDTO get(@PathVariable Long id){
         log.info("buscando por usuario" + id);
-        return getUser(id);
+        return UsuarioMapper.toDTO(getUser(id));
     }
 
     //atualizar infos moto

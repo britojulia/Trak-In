@@ -3,7 +3,7 @@ package br.com.fiap.Trak_In.mappings;
 import br.com.fiap.Trak_In.DTOs.ZonaPatioDTO;
 import br.com.fiap.Trak_In.model.ZonaPatio;
 
-public class ZonaPatioMApper {
+public class ZonaPatioMapper {
     
      public static ZonaPatioDTO toDTO(ZonaPatio entity) {
         return ZonaPatioDTO.builder()

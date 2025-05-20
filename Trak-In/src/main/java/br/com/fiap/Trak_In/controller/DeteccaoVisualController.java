@@ -20,6 +20,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.com.fiap.Trak_In.DTOs.CameraDTO;
+import br.com.fiap.Trak_In.DTOs.DeteccaoVisualDTO;
+import br.com.fiap.Trak_In.mappings.CameraMapper;
+import br.com.fiap.Trak_In.mappings.DeteccaoVisualMapper;
 import br.com.fiap.Trak_In.model.DeteccaoVisual;
 import br.com.fiap.Trak_In.repository.DeteccaoVisualRepository;
 import br.com.fiap.Trak_In.specification.DetecacaoVisualSpecification;
@@ -44,12 +48,13 @@ public class DeteccaoVisualController {
     @Autowired
     private DeteccaoVisualRepository repository;
 
-    //listar todoa dados d detecção visual cadastrada
+    //listar todos os dados de detecção visual cadastrada
      @GetMapping
-    public Page<DeteccaoVisual> index(DeteccaoVisualFilter filter,
+    public Page<DeteccaoVisualDTO> index(DeteccaoVisualFilter filter,
      @PageableDefault(size = 5, sort= "id", direction = Direction.DESC) Pageable pageable){
         var specification = DetecacaoVisualSpecification.withFilters(filter);
-        return repository.findAll(specification, pageable);
+        return repository.findAll(specification, pageable)
+        .map(DeteccaoVisualMapper::toDTO);
     }
 
     //cadastrar 
@@ -63,9 +68,9 @@ public class DeteccaoVisualController {
 
     //buscar por deteccao específica
     @GetMapping("{id}")
-    public DeteccaoVisual get(@PathVariable Long id){
+    public DeteccaoVisualDTO get(@PathVariable Long id){
         log.info("buscando por deteccao" + id);
-        return getDeteccao(id);
+        return DeteccaoVisualMapper.toDTO(getDeteccao(id));
     }
 
     //deletar ?

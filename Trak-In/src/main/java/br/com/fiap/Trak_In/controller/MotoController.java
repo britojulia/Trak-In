@@ -21,6 +21,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.com.fiap.Trak_In.DTOs.CameraDTO;
+import br.com.fiap.Trak_In.DTOs.MotoDTO;
+import br.com.fiap.Trak_In.mappings.CameraMapper;
+import br.com.fiap.Trak_In.mappings.MotoMapper;
 import br.com.fiap.Trak_In.model.Moto;
 import br.com.fiap.Trak_In.model.Patio;
 import br.com.fiap.Trak_In.model.TypesEnum.StatusMoto;
@@ -53,10 +57,11 @@ public class MotoController {
 
     //listar todas as motos cadastradas
     @GetMapping
-     public Page<Moto> index(MotoFilter filter, 
+     public Page<MotoDTO> index(MotoFilter filter, 
         @PageableDefault(size = 5, sort = "id", direction = Direction.DESC) Pageable pageable) {
     var specification = MotoSpecification.withFilters(filter);
-    return repository.findAll(specification, pageable);
+    return repository.findAll(specification, pageable)
+    .map(MotoMapper::toDTO);
     }
 
     //cadastrar motos
@@ -70,9 +75,9 @@ public class MotoController {
 
     //buscar por id
     @GetMapping("{id}")
-    public Moto get(@PathVariable Long id){
+    public MotoDTO get(@PathVariable Long id){
         log.info("buscando por moto" + id);
-        return getMoto(id);
+        return MotoMapper.toDTO(getMoto(id));
     }
 
     //atualizar infos moto

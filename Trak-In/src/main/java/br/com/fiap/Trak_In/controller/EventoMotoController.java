@@ -21,7 +21,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.com.fiap.Trak_In.DTOs.CameraDTO;
+import br.com.fiap.Trak_In.DTOs.EventoMotoDTO;
 import br.com.fiap.Trak_In.controller.DeteccaoVisualController.DeteccaoVisualFilter;
+import br.com.fiap.Trak_In.mappings.CameraMapper;
+import br.com.fiap.Trak_In.mappings.EventoMotoMapper;
 import br.com.fiap.Trak_In.model.DeteccaoVisual;
 import br.com.fiap.Trak_In.model.EventoMoto;
 import br.com.fiap.Trak_In.model.Moto;
@@ -53,11 +57,13 @@ public class EventoMotoController {
 
     //listar todas os eventos da mota cadastrados
     @GetMapping
-    public Page<EventoMoto> index(EventoFilter filter,
+    public Page<EventoMotoDTO> index(EventoFilter filter,
      @PageableDefault(size = 5, sort= "id", direction = Direction.DESC) Pageable pageable){
     var specification = EventoSpecification.withFilters(filter);
-    return repository.findAll(specification, pageable);
+    return repository.findAll(specification, pageable)
+    .map(EventoMotoMapper::toDTO);
     }
+
 
     //cadastrar novo evento
     @PostMapping
@@ -70,9 +76,9 @@ public class EventoMotoController {
 
     //buscar por id
     @GetMapping("{id}")
-    public EventoMoto get(@PathVariable Long id){
+    public EventoMotoDTO get(@PathVariable Long id){
         log.info("buscando por moto" + id);
-        return getEvento(id);
+        return EventoMotoMapper.toDTO(getEvento(id));
     }
 
     //atualizar infos 

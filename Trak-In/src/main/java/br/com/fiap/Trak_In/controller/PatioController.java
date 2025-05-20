@@ -21,7 +21,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.com.fiap.Trak_In.DTOs.PatioDTO;
 import br.com.fiap.Trak_In.controller.DeteccaoVisualController.DeteccaoVisualFilter;
+import br.com.fiap.Trak_In.mappings.PatioMapper;
 import br.com.fiap.Trak_In.model.DeteccaoVisual;
 import br.com.fiap.Trak_In.model.Patio;
 import br.com.fiap.Trak_In.repository.PatioRepository;
@@ -41,9 +43,10 @@ public class PatioController {
 
     // LISTAR TODOS OS PATIOS
     @GetMapping
-    public Page<Patio> index(
+    public Page<PatioDTO> index(
      @PageableDefault(size = 5, sort= "id", direction = Direction.DESC) Pageable pageable){
-        return repository.findAll(pageable);
+        return repository.findAll(pageable)
+        .map(PatioMapper::toDTO);
     }
 
     // CADASTRAR
@@ -58,9 +61,9 @@ public class PatioController {
 
     // BUSCAR POR ID
     @GetMapping("{id}")
-    public Patio get(@PathVariable Long id) {
+    public PatioDTO get(@PathVariable Long id) {
         log.info("Buscando pátio por id: " + id);
-        return getPatio(id);
+        return PatioMapper.toDTO(getPatio(id));
     }
 
     // ATUALIZAR
