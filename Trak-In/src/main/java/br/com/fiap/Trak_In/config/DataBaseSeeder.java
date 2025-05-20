@@ -206,6 +206,7 @@ deteccaoVisualRepository.saveAll(deteccoes);
     LocalizacaoMoto.builder().coordenadaX(10.8).coordenadaY(20.6).timestamp(LocalDateTime.now().minusHours(9)).status(StatusLocalizacao.ESTACIONADA).fonteDados(FonteDados.VISAO_COMPUTACIONAL).confiabilidade(0.91).motoId(motos.get(8)).patio(patio).build(),
     LocalizacaoMoto.builder().coordenadaX(11.0).coordenadaY(21.5).timestamp(LocalDateTime.now().minusHours(10)).status(StatusLocalizacao.ESTACIONADA).fonteDados(FonteDados.RFID).confiabilidade(0.87).motoId(motos.get(9)).patio(patio).build()
 );
+localizacaoRepository.saveAll(localizacoes);
 
     var tipos = List.of(
         "Entrada",
