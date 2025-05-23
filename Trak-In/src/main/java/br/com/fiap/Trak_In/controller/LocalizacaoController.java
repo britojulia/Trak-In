@@ -37,7 +37,7 @@ public class LocalizacaoController {
     public record LocalizacaoFilter(
     StatusLocalizacao status,
     FonteDados fonteDados,
-    Long motoId,
+    String moto,
     Long patioId
 ) {}
 

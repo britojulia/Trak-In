@@ -23,6 +23,6 @@ public class LocalizacaoDTO {
     private FonteDados fonteDados;
     private Double confiabilidade;
 
-    private Long motoId; //retornando apenas o id da moto
+    private String moto; //retornando apenas a placa da moto
     private Long patioId; //retornando apenas o id do pátio
 }

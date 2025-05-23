@@ -14,19 +14,19 @@ public class LocalizacaoSpecification {
         return (root, query, cb) -> {
             List<Predicate> predicates = new ArrayList<>();
 
-           // filtrar por Status de localização
+           // filtrar por Status de localização - ESTACIONADA, EM_MOVIMENTO
             if (filter.status() != null) {
-                predicates.add(cb.equal(root.get("statusLocalizacao"), filter.status()));
+                predicates.add(cb.equal(root.get("status"), filter.status()));
             }
 
-            // filtrar por fonte de dados (rfid ou deteccao)
+            // filtrar por fonte de dados - RFID, VISAO_COMPUTACIONAL, FUSAO, MANUAL
             if (filter.fonteDados() != null) {
                 predicates.add(cb.equal(root.get("fonteDados"), filter.fonteDados()));
             }
 
-            //filtrar por ID da moto
-            if (filter.motoId() != null) {
-                predicates.add(cb.equal(root.get("motoId").get("id"), filter.motoId()));
+            //filtrar por placa da moto
+            if (filter.moto() != null) {
+                predicates.add(cb.equal(root.get("moto").get("placa"), filter.moto()));
             }
 
             //filtrar por ID do pátio

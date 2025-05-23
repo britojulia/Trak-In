@@ -12,7 +12,7 @@ import io.swagger.v3.oas.annotations.info.Info;
 @EnableCaching
 @OpenAPIDefinition(info = @Info(title = "TrackIn API", version = "1",
 description = "API do Challenge do para o projeto de java TrackIn ", 
-contact = @Contact(name = "Júlia Brito, Leandro Correa, Victor Antonopoulos", 
+contact = @Contact(name = "Júlia Brito, Leandro Correia, Victor Antonopoulos", 
 email = "juliabri1234@gmail.com")))
 public class TrakInApplication {
 

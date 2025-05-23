@@ -19,7 +19,7 @@ public class FilialSpecification {
                 predicates.add(cb.like(cb.lower(root.get("nome")), "%" + filter.nome().toLowerCase() + "%"));
             }
             
-            //filtrar por id doresponsável
+            //filtrar por id do responsável
             if (filter.responsavelId() != null) {
                 predicates.add(cb.equal(root.get("responsavelId").get("id"), filter.responsavelId()));
             }
@@ -28,7 +28,6 @@ public class FilialSpecification {
             if (filter.patioId() != null) {
                 predicates.add(cb.equal(root.get("patio").get("id"), filter.patioId()));
             }
-        
             
             return cb.and(predicates.toArray(new Predicate[0]));
 

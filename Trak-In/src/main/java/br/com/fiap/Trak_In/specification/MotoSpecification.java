@@ -29,7 +29,7 @@ public class MotoSpecification {
                 predicates.add(cb.like(cb.lower(root.get("rfidTag")), "%" + filter.rfidTag().toLowerCase() + "%"));
             }
 
-            //filtra por Status
+            //filtra por Status - DISPONIVEL, EM_MANUTENCAO, ALUGADA
             if (filter.status() != null) {
                 predicates.add(cb.equal(root.get("status"), filter.status()));
             }
@@ -48,10 +48,6 @@ public class MotoSpecification {
                 predicates.add(cb.lessThanOrEqualTo(root.get("ultimaManutencao"), filter.ultimaManutencaoFim()));
             }
 
-            // Filtro por pátio
-            if (filter.patioId() != null) {
-                predicates.add(cb.equal(root.get("patioId").get("id"), filter.patioId()));
-            }
             return cb.and(predicates.toArray(new Predicate[0]));
 
         };

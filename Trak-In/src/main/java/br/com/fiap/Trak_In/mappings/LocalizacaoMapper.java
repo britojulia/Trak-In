@@ -14,7 +14,7 @@ public class LocalizacaoMapper {
                 .status(entity.getStatus())
                 .fonteDados(entity.getFonteDados())
                 .confiabilidade(entity.getConfiabilidade())
-                .motoId(entity.getMotoId() != null ? entity.getMotoId().getId() : null)
+                .moto(entity.getMoto() != null ? entity.getMoto().getPlaca() : null)
                 .patioId(entity.getPatio() != null ? entity.getPatio().getId() : null)
                 .build();
     }

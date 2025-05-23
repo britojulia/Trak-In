@@ -14,7 +14,7 @@ public class CameraSpecification {
         return (root, query, cb) -> {
             List<Predicate> predicates = new ArrayList<>();
             
-            // Filtrar por status da câmera (ATIVA, INATIVA, etc.)
+            // Filtrar por status da câmera (ATIVO, INATIVO, MANUTENCAO)
             if (filter.status() != null) {
                 predicates.add(cb.equal(root.get("status"), filter.status()));
             }

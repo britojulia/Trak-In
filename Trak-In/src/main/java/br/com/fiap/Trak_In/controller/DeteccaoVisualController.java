@@ -33,7 +33,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/deteccao")
 public class DeteccaoVisualController {
     public record DeteccaoVisualFilter(String placaMoto,
-    String posicaoCamera,
+    String idCamera,
     LocalDate dataInicio,
     LocalDate dataFim){}
 

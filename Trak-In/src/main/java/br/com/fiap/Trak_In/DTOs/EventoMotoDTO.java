@@ -1,6 +1,6 @@
 package br.com.fiap.Trak_In.DTOs;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import br.com.fiap.Trak_In.model.TypesEnum.FonteEvento;
 
@@ -16,10 +16,10 @@ import lombok.NoArgsConstructor;
 public class EventoMotoDTO {
     private Long id;
     private String tipo;
-    private LocalDateTime timesTamp;
+    private LocalDate timesTamp;
     private String observacao;
     private FonteEvento fonteEvento;
 
     private Long usuarioId;  //retornando apenas o id do usuario referenciado a moto
-    private Long motoId;  //retornando apenas o id da moto
+    private String placaMoto;  //retornando apenas a placa da moto
 }

@@ -195,16 +195,16 @@ deteccaoVisualRepository.saveAll(deteccoes);
 
     //cria 10 localizacoes pras motos
     var localizacoes = List.of(
-    LocalizacaoMoto.builder().coordenadaX(10.5).coordenadaY(20.3).timestamp(LocalDateTime.now().minusHours(2)).status(StatusLocalizacao.EM_MOVIMENTO).fonteDados(FonteDados.VISAO_COMPUTACIONAL).confiabilidade(0.95).motoId(motos.get(0)).patio(patio).build(),
-    LocalizacaoMoto.builder().coordenadaX(11.2).coordenadaY(21.0).timestamp(LocalDateTime.now().minusHours(3)).status(StatusLocalizacao.ESTACIONADA).fonteDados(FonteDados.RFID).confiabilidade(0.85).motoId(motos.get(1)).patio(patio).build(),
-    LocalizacaoMoto.builder().coordenadaX(9.8).coordenadaY(19.7).timestamp(LocalDateTime.now().minusHours(1)).status(StatusLocalizacao.ESTACIONADA).fonteDados(FonteDados.FUSAO).confiabilidade(0.90).motoId(motos.get(2)).patio(patio).build(),
-    LocalizacaoMoto.builder().coordenadaX(12.0).coordenadaY(22.4).timestamp(LocalDateTime.now().minusHours(4)).status(StatusLocalizacao.ESTACIONADA).fonteDados(FonteDados.MANUAL).confiabilidade(0.80).motoId(motos.get(3)).patio(patio).build(),
-    LocalizacaoMoto.builder().coordenadaX(10.9).coordenadaY(20.8).timestamp(LocalDateTime.now().minusHours(5)).status(StatusLocalizacao.ESTACIONADA).fonteDados(FonteDados.VISAO_COMPUTACIONAL).confiabilidade(0.92).motoId(motos.get(4)).patio(patio).build(),
-    LocalizacaoMoto.builder().coordenadaX(11.5).coordenadaY(21.3).timestamp(LocalDateTime.now().minusHours(6)).status(StatusLocalizacao.ESTACIONADA).fonteDados(FonteDados.RFID).confiabilidade(0.88).motoId(motos.get(5)).patio(patio).build(),
-    LocalizacaoMoto.builder().coordenadaX(9.7).coordenadaY(19.9).timestamp(LocalDateTime.now().minusHours(7)).status(StatusLocalizacao.ESTACIONADA).fonteDados(FonteDados.FUSAO).confiabilidade(0.83).motoId(motos.get(6)).patio(patio).build(),
-    LocalizacaoMoto.builder().coordenadaX(12.3).coordenadaY(22.1).timestamp(LocalDateTime.now().minusHours(8)).status(StatusLocalizacao.EM_MOVIMENTO).fonteDados(FonteDados.MANUAL).confiabilidade(0.79).motoId(motos.get(7)).patio(patio).build(),
-    LocalizacaoMoto.builder().coordenadaX(10.8).coordenadaY(20.6).timestamp(LocalDateTime.now().minusHours(9)).status(StatusLocalizacao.ESTACIONADA).fonteDados(FonteDados.VISAO_COMPUTACIONAL).confiabilidade(0.91).motoId(motos.get(8)).patio(patio).build(),
-    LocalizacaoMoto.builder().coordenadaX(11.0).coordenadaY(21.5).timestamp(LocalDateTime.now().minusHours(10)).status(StatusLocalizacao.ESTACIONADA).fonteDados(FonteDados.RFID).confiabilidade(0.87).motoId(motos.get(9)).patio(patio).build()
+    LocalizacaoMoto.builder().coordenadaX(10.5).coordenadaY(20.3).timestamp(LocalDateTime.now().minusHours(2)).status(StatusLocalizacao.EM_MOVIMENTO).fonteDados(FonteDados.VISAO_COMPUTACIONAL).confiabilidade(0.95).moto(motos.get(0)).patio(patio).build(),
+    LocalizacaoMoto.builder().coordenadaX(11.2).coordenadaY(21.0).timestamp(LocalDateTime.now().minusHours(3)).status(StatusLocalizacao.ESTACIONADA).fonteDados(FonteDados.RFID).confiabilidade(0.85).moto(motos.get(1)).patio(patio).build(),
+    LocalizacaoMoto.builder().coordenadaX(9.8).coordenadaY(19.7).timestamp(LocalDateTime.now().minusHours(1)).status(StatusLocalizacao.ESTACIONADA).fonteDados(FonteDados.FUSAO).confiabilidade(0.90).moto(motos.get(2)).patio(patio).build(),
+    LocalizacaoMoto.builder().coordenadaX(12.0).coordenadaY(22.4).timestamp(LocalDateTime.now().minusHours(4)).status(StatusLocalizacao.ESTACIONADA).fonteDados(FonteDados.MANUAL).confiabilidade(0.80).moto(motos.get(3)).patio(patio).build(),
+    LocalizacaoMoto.builder().coordenadaX(10.9).coordenadaY(20.8).timestamp(LocalDateTime.now().minusHours(5)).status(StatusLocalizacao.ESTACIONADA).fonteDados(FonteDados.VISAO_COMPUTACIONAL).confiabilidade(0.92).moto(motos.get(4)).patio(patio).build(),
+    LocalizacaoMoto.builder().coordenadaX(11.5).coordenadaY(21.3).timestamp(LocalDateTime.now().minusHours(6)).status(StatusLocalizacao.ESTACIONADA).fonteDados(FonteDados.RFID).confiabilidade(0.88).moto(motos.get(5)).patio(patio).build(),
+    LocalizacaoMoto.builder().coordenadaX(9.7).coordenadaY(19.9).timestamp(LocalDateTime.now().minusHours(7)).status(StatusLocalizacao.ESTACIONADA).fonteDados(FonteDados.FUSAO).confiabilidade(0.83).moto(motos.get(6)).patio(patio).build(),
+    LocalizacaoMoto.builder().coordenadaX(12.3).coordenadaY(22.1).timestamp(LocalDateTime.now().minusHours(8)).status(StatusLocalizacao.EM_MOVIMENTO).fonteDados(FonteDados.MANUAL).confiabilidade(0.79).moto(motos.get(7)).patio(patio).build(),
+    LocalizacaoMoto.builder().coordenadaX(10.8).coordenadaY(20.6).timestamp(LocalDateTime.now().minusHours(9)).status(StatusLocalizacao.ESTACIONADA).fonteDados(FonteDados.VISAO_COMPUTACIONAL).confiabilidade(0.91).moto(motos.get(8)).patio(patio).build(),
+    LocalizacaoMoto.builder().coordenadaX(11.0).coordenadaY(21.5).timestamp(LocalDateTime.now().minusHours(10)).status(StatusLocalizacao.ESTACIONADA).fonteDados(FonteDados.RFID).confiabilidade(0.87).moto(motos.get(9)).patio(patio).build()
 );
 localizacaoRepository.saveAll(localizacoes);
 
@@ -250,11 +250,11 @@ localizacaoRepository.saveAll(localizacoes);
     for (int i = 0; i < 15; i++) {
         eventos.add(EventoMoto.builder()
             .tipo(tipos.get(random.nextInt(tipos.size())))
-            .timesTamp(LocalDateTime.now().minusDays(random.nextInt(30)).minusHours(random.nextInt(24)))
+            .timesTamp(LocalDate.now().minusDays(random.nextInt(30)))
             .observacao(observacoes.get(random.nextInt(observacoes.size())))
             .fonteEvento(FonteEvento.values()[random.nextInt(FonteEvento.values().length)])
-            .usuarioId(usuarios.get(random.nextInt(usuarios.size())))
-            .motoId(motos.get(random.nextInt(motos.size())))
+            .usuario(usuarios.get(random.nextInt(usuarios.size())))
+            .moto(motos.get(random.nextInt(motos.size())))
             .build()
         );
     }

@@ -1,5 +1,6 @@
 package br.com.fiap.Trak_In.controller;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,11 +37,11 @@ import lombok.extern.slf4j.Slf4j;
 public class EventoMotoController {
     public record EventoFilter(
     String tipo,
-    LocalDateTime dataInicio,
-    LocalDateTime dataFim,
+    LocalDate dataInicio,
+    LocalDate dataFim,
     FonteEvento fonteEvento,
     Long usuarioId,
-    Long motoId
+    String placaMoto
 ) {}
 
     @Autowired

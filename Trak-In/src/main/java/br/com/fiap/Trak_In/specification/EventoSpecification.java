@@ -14,28 +14,28 @@ public class EventoSpecification {
         return (root, query, cb) -> {
             List<Predicate> predicates = new ArrayList<>();
 
-           /// filtrar por Tipo de evento
+           /// filtrar por Tipo de evento - Limpeza, Aluguel, Teste de sistema
             if (filter.tipo() != null && !filter.tipo().isBlank()) {
                 predicates.add(cb.like(cb.lower(root.get("tipo")), "%" + filter.tipo().toLowerCase() + "%"));
             }
 
             //filtrar por  Intervalo de datas
             if (filter.dataInicio() != null) {
-                predicates.add(cb.greaterThanOrEqualTo(root.get("timesTamp"), filter.dataInicio()));
+                predicates.add(cb.greaterThanOrEqualTo(root.get("timesTamp"), filter.dataInicio().atStartOfDay()));
             }
 
             if (filter.dataFim() != null) {
-                predicates.add(cb.lessThanOrEqualTo(root.get("timesTamp"), filter.dataFim()));
+                predicates.add(cb.lessThanOrEqualTo(root.get("timesTamp"), filter.dataFim().atTime(23, 59, 59)));
             }
 
             // filtrar por Usuário associado ao evento
             if (filter.usuarioId() != null) {
-                predicates.add(cb.equal(root.get("usuarioId").get("id"), filter.usuarioId()));
+                predicates.add(cb.equal(root.get("usuario").get("id"), filter.usuarioId()));
             }
 
-            //filtrar por ID da Moto
-            if (filter.motoId() != null) {
-                predicates.add(cb.equal(root.get("motoId").get("id"), filter.motoId()));
+            //filtrar por placa da Moto
+            if (filter.placaMoto() != null) {
+                predicates.add(cb.equal(root.get("moto").get("placa"), filter.placaMoto()));
             }
             return cb.and(predicates.toArray(new Predicate[0]));
 

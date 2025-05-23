@@ -22,7 +22,6 @@ import org.springframework.web.server.ResponseStatusException;
 import br.com.fiap.Trak_In.DTOs.MotoDTO;
 import br.com.fiap.Trak_In.mappings.MotoMapper;
 import br.com.fiap.Trak_In.model.Moto;
-import br.com.fiap.Trak_In.model.Patio;
 import br.com.fiap.Trak_In.model.TypesEnum.StatusMoto;
 import br.com.fiap.Trak_In.repository.MotoRepository;
 import br.com.fiap.Trak_In.specification.MotoSpecification;
@@ -44,8 +43,7 @@ public class MotoController {
     String rfidTag,
     LocalDate dataAquisicao,
     LocalDate ultimaManutencaoInicio,
-    LocalDate ultimaManutencaoFim,
-    Patio patioId
+    LocalDate ultimaManutencaoFim
 ) {}
     
     @Autowired

@@ -16,7 +16,6 @@ public class DetecacaoVisualSpecification {
             List<Predicate> predicates = new ArrayList<>();
 
             //filtrar por data d inicio e fim
-            
             if (filter.dataInicio() != null) {
                 predicates.add(cb.greaterThanOrEqualTo(
                         root.get("timesTamp"), filter.dataInicio().atStartOfDay()));
@@ -27,14 +26,14 @@ public class DetecacaoVisualSpecification {
                         root.get("timesTamp"), filter.dataFim().atTime(23, 59, 59)));
             }
 
-             // Filtrar por ID da moto
+             // Filtrar por placa da moto
             if (filter.placaMoto() != null) {
-                predicates.add(cb.equal(root.get("moto").get("id"), filter.placaMoto()));
+                predicates.add(cb.equal(root.get("moto").get("placa"), filter.placaMoto()));
             }
 
             // Filtrar por ID da câmera
-            if (filter.posicaoCamera() != null) {
-                predicates.add(cb.equal(root.get("camera").get("id"), filter.posicaoCamera()));
+            if (filter.idCamera() != null) {
+                predicates.add(cb.equal(root.get("camera").get("id"), filter.idCamera()));
             }
 
             

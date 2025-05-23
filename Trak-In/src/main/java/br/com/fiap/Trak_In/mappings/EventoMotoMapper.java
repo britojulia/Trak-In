@@ -12,8 +12,8 @@ public class EventoMotoMapper {
                 .timesTamp(entity.getTimesTamp())
                 .observacao(entity.getObservacao())
                 .fonteEvento(entity.getFonteEvento())
-                .usuarioId(entity.getUsuarioId() != null ? entity.getUsuarioId().getId() : null)
-                .motoId(entity.getMotoId() != null ? entity.getMotoId().getId() : null)
+                .usuarioId(entity.getUsuario() != null ? entity.getUsuario().getId() : null)
+                .placaMoto(entity.getMoto() != null ? entity.getMoto().getPlaca() : null)
                 .build();
     }
 }

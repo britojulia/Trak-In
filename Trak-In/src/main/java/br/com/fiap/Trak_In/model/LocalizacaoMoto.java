@@ -43,7 +43,7 @@ public class LocalizacaoMoto {
 
     @ManyToOne
     @JoinColumn(name = "moto_id")
-    private Moto motoId;
+    private Moto moto;
 
     @ManyToOne
     @JoinColumn(name = "patio_id")

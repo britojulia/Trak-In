@@ -24,7 +24,7 @@ public class UsuarioSpecification {
                 predicates.add(cb.like(cb.lower(root.get("email")), "%" + filter.email().toLowerCase() + "%"));
             }
 
-            // filtar por perfil
+            // filtar por perfil - ADMIN, OPERADOR, GERENTE
             if (filter.perfil() != null) {
                 predicates.add(cb.equal(root.get("perfil"), filter.perfil()));
             }

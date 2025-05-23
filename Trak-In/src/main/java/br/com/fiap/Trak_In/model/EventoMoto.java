@@ -1,7 +1,6 @@
 package br.com.fiap.Trak_In.model;
 
-import java.time.LocalDateTime;
-
+import java.time.LocalDate;
 import br.com.fiap.Trak_In.model.TypesEnum.FonteEvento;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -27,7 +26,7 @@ public class EventoMoto {
 
     private String tipo; //tipo de evento - entrada, saída, manutenção etc
 
-    private LocalDateTime timesTamp;
+    private LocalDate timesTamp;
 
     private String observacao;
 
@@ -35,8 +34,8 @@ public class EventoMoto {
     private FonteEvento fonteEvento; //Sistema, Manual, VisaoComputacional, RFID
 
     @ManyToOne
-    private Usuario usuarioId;
+    private Usuario usuario;
 
     @ManyToOne
-    private Moto motoId;
+    private Moto moto;
 }
