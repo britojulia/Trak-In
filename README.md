@@ -26,13 +26,13 @@ Usuario: [GET /user, GET /user/{id}, POST /user, PUT /user/{id}, DELETE /user/{i
 ZonaPatio: [GET /zona, GET /zona/{id}, POST /zona, PUT /zona/{id}, DELETE /zona/{id}]
 
 ## Filtros
-Camera
+Camera --------------------------
 
 status: filtra câmeras pelo status (ativo, inativo, manutenção).
 
 idPatio: filtra câmeras por pátio (ID do pátio).
 
-DeteccaoVisual
+DeteccaoVisual  --------------------------
 
 dataInicio e dataFim: filtra detecções visuais pelo intervalo de datas.
 
@@ -40,7 +40,7 @@ placaMoto: filtra por placa da moto.
 
 idCamera: filtra por ID da câmera.
 
-Evento
+Evento  --------------------------
 
 tipo: filtra eventos pelo tipo.
 
@@ -50,7 +50,7 @@ usuarioId: filtra eventos por usuário.
 
 placaMoto: filtra eventos por placa da moto.
 
-Filial
+Filial  --------------------------
 
 nome: filtra filiais pelo nome.
 
@@ -58,7 +58,7 @@ responsavelId: filtra por ID do responsável da filial.
 
 patioId: filtra por ID do pátio associado.
 
-Localizacao
+Localizacao  --------------------------
 
 status: filtra localização da moto pelo status (ex: ESTACIONADA, EM_MOVIMENTO).
 
@@ -68,7 +68,7 @@ moto: filtra por placa da moto.
 
 patioId: filtra por ID do pátio.
 
-Moto
+Moto  --------------------------
 
 placa: filtra motos pela placa.
 
@@ -82,7 +82,7 @@ dataAquisicao: filtra motos adquiridas a partir da data especificada.
 
 ultimaManutencaoInicio e ultimaManutencaoFim: filtra motos com última manutenção dentro do intervalo de datas.
 
-Patio
+Patio  --------------------------
 
 nome: filtra pátios pelo nome (contém, case-insensitive).
 
@@ -90,7 +90,7 @@ estado: filtra pátios pelo estado (igual, case-insensitive).
 
 pais filtra pátios pelo país (igual, case-insensitive; ex: Brasil, México).
 
-Usuario
+Usuario  --------------------------
 
 nome: filtra usuários pelo nome.
 
@@ -100,7 +100,7 @@ perfil: filtra pelo perfil do usuário (ex: ADMIN, OPERADOR, GERENTE).
 
 filialId: filtra pelo ID da filial associada.
 
-Zona (ZonaPatio)
+Zona (ZonaPatio)  --------------------------
 
 nome: filtra zonas pelo nome.
 
