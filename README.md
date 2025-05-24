@@ -27,53 +27,85 @@ ZonaPatio: [GET /zona, GET /zona/{id}, POST /zona, PUT /zona/{id}, DELETE /zona/
 
 ## Filtros
 Camera
+
 status: filtra câmeras pelo status (ativo, inativo, manutenção).
+
 idPatio: filtra câmeras por pátio (ID do pátio).
 
 DeteccaoVisual
+
 dataInicio e dataFim: filtra detecções visuais pelo intervalo de datas.
+
 placaMoto: filtra por placa da moto.
+
 idCamera: filtra por ID da câmera.
 
 Evento
+
 tipo: filtra eventos pelo tipo.
+
 dataInicio e dataFim: filtra eventos pelo intervalo de datas.
+
 usuarioId: filtra eventos por usuário.
+
 placaMoto: filtra eventos por placa da moto.
 
-Filial=
+Filial
+
 nome: filtra filiais pelo nome.
+
 responsavelId: filtra por ID do responsável da filial.
+
 patioId: filtra por ID do pátio associado.
 
 Localizacao
+
 status: filtra localização da moto pelo status (ex: ESTACIONADA, EM_MOVIMENTO).
+
 fonteDados: filtra pela fonte dos dados (ex: RFID, VISÃO_COMPUTACIONAL).
+
 moto: filtra por placa da moto.
+
 patioId: filtra por ID do pátio.
 
 Moto
+
 placa: filtra motos pela placa.
+
 modelo: filtra pelo modelo da moto.
+
 rfidTag: filtra pelo RFID.
+
 status: filtra pelo status da moto (ex: DISPONIVEL, EM_MANUTENCAO, ALUGADA).
+
 dataAquisicao: filtra motos adquiridas a partir da data especificada.
+
 ultimaManutencaoInicio e ultimaManutencaoFim: filtra motos com última manutenção dentro do intervalo de datas.
 
 Patio
+
 nome: filtra pátios pelo nome (contém, case-insensitive).
+
 estado: filtra pátios pelo estado (igual, case-insensitive).
+
 pais filtra pátios pelo país (igual, case-insensitive; ex: Brasil, México).
 
 Usuario
+
 nome: filtra usuários pelo nome.
+
 email: filtra usuários pelo email.
+
 perfil: filtra pelo perfil do usuário (ex: ADMIN, OPERADOR, GERENTE).
+
 filialId: filtra pelo ID da filial associada.
 
 Zona (ZonaPatio)
+
 nome: filtra zonas pelo nome.
+
 cor: filtra zonas pela cor.
+
 idPatio: filtra por ID do pátio relacionado.
 
 ## 🔧 Como rodar o projeto
