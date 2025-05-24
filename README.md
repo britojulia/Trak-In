@@ -1,21 +1,28 @@
 # 🚀 Trak_In - Monitoramento Inteligente de Motos
-Trak_In é uma aplicação desenvolvida para facilitar o mapeamento, rastreamento e monitoramento de motos nos pátios das filiais da Mottu.
-O sistema busca melhorar a eficiência operacional por meio de automação com câmeras, sensores RFID e visão computacional.
+Track In é uma solução inovadora desenvolvida para o Challenge 2025 da FIAP,  pelos alunos Julia, Leandro e Victor da turma 2TDSPG, voltada à automação do monitoramento de motos em pátios de filiais da Mottu. Combinando tecnologias de Visão Computacional e IoT, o projeto permite a identificação precisa e a localização em tempo real das motos, mesmo em ambientes com grande volume e variedade de veículos.
 
-##🧑‍💻 Desenvolvido por
+## 🧑‍💻 Desenvolvido por
 Julia – RM558831
 Leandro Correia - RM 556203
 Victor Antonopoulos - RM556313
 
 ## 🎯 Endpoints
 Camera: [GET /camera, GET /camera/{id}, POST /camera, PUT /camera/{id}, DELETE /camera/{id}]
+
 Detecção Visual: [GET /deteccao, GET /deteccao/{id}, POST /deteccao, DELETE /deteccao/{id}]
+
 Evento Moto: [GET /evento, GET /evento/{id}, POST /evento, PUT /evento/{id}, DELETE /evento/{id}]
+
 Filial: [GET /filial, GET /filial/{id}, POST /filial, PUT /filial/{id}, DELETE /filial/{id}]
+
 Localizacao: [GET /localizacao, GET /localizacao/{id}, POST /localizacao, DELETE /localizacao/{id}]
+
 Moto: [GET /moto, GET /moto/{id}, POST /moto, PUT /moto/{id}, DELETE /moto/{id}]
+
 Patio: [GET /patio, GET /patio/{id}, POST /patio, PUT /patio/{id}, DELETE /patio/{id}]
+
 Usuario: [GET /user, GET /user/{id}, POST /user, PUT /user/{id}, DELETE /user/{id}]
+
 ZonaPatio: [GET /zona, GET /zona/{id}, POST /zona, PUT /zona/{id}, DELETE /zona/{id}]
 
 ## Filtros
@@ -87,5 +94,5 @@ Rode essa classe como aplicação Java
 Use o Postman, Insomnia, curl ou navegador
 Teste as rotas que o projeto expõe (ex: GET http://localhost:8080/moto) 
 
-##📄 Nosso Pitch
+## 📄 Nosso Pitch
 🎥 [Clique aqui para assistir ao vídeo no YouTube: https://youtu.be/PCHSHT0CuMA]
