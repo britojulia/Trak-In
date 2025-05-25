@@ -84,11 +84,11 @@ ultimaManutencaoInicio e ultimaManutencaoFim: filtra motos com última manutenç
 
 Patio  --------------------------
 
-nome: filtra pátios pelo nome (contém, case-insensitive).
+nome: filtra pátios pelo nome.
 
-estado: filtra pátios pelo estado (igual, case-insensitive).
+estado: filtra pátios pelo estado.
 
-pais filtra pátios pelo país (igual, case-insensitive; ex: Brasil, México).
+pais filtra pátios pelo país  (ex: Brasil, México).
 
 Usuario  --------------------------
 
